@@ -2,15 +2,24 @@ extends Node2D
 
 @onready var food = $Food
 @onready var snake = $Snake
+@onready var score_label = $ScoreLabel
 
 var grid_size = 32
 var game_area = Vector2(640, 480)  # adjust this if your game is a different size
+var score = 0  # 🆕 Score variable
 
 func _ready():
 	randomize()
 	move_food()
-	create_walls()
+	#create_walls()
+	update_score()  # 🆕 Show initial score
 
+func increase_score():
+	score += 1
+	update_score()
+
+func update_score():
+	score_label.text = "Score: %d" % score
 
 func move_food():
 	var columns = int(game_area.x / grid_size)
@@ -29,32 +38,32 @@ func move_food():
 	food.position = rand_pos
 
 	
-func create_walls():
-	var wall_thickness = 16
-
-	var top_wall = ColorRect.new()
-	top_wall.color = Color.WHITE
-	top_wall.size = Vector2(game_area.x, wall_thickness)
-	top_wall.position = Vector2(0, 0)
-	add_child(top_wall)
-
-	var bottom_wall = ColorRect.new()
-	bottom_wall.color = Color.WHITE
-	bottom_wall.size = Vector2(game_area.x, wall_thickness)
-	bottom_wall.position = Vector2(0, game_area.y - wall_thickness)
-	add_child(bottom_wall)
-
-	var left_wall = ColorRect.new()
-	left_wall.color = Color.WHITE
-	left_wall.size = Vector2(wall_thickness, game_area.y)
-	left_wall.position = Vector2(0, 0)
-	add_child(left_wall)
-
-	var right_wall = ColorRect.new()
-	right_wall.color = Color.WHITE
-	right_wall.size = Vector2(wall_thickness, game_area.y)
-	right_wall.position = Vector2(game_area.x - wall_thickness, 0)
-	add_child(right_wall)
+#func create_walls():
+	#var wall_thickness = 16
+#
+	#var top_wall = ColorRect.new()
+	#top_wall.color = Color.WHITE
+	#top_wall.size = Vector2(game_area.x, wall_thickness)
+	#top_wall.position = Vector2(0, 0)
+	#add_child(top_wall)
+#
+	#var bottom_wall = ColorRect.new()
+	#bottom_wall.color = Color.WHITE
+	#bottom_wall.size = Vector2(game_area.x, wall_thickness)
+	#bottom_wall.position = Vector2(0, game_area.y - wall_thickness)
+	#add_child(bottom_wall)
+#
+	#var left_wall = ColorRect.new()
+	#left_wall.color = Color.WHITE
+	#left_wall.size = Vector2(wall_thickness, game_area.y)
+	#left_wall.position = Vector2(0, 0)
+	#add_child(left_wall)
+#
+	#var right_wall = ColorRect.new()
+	#right_wall.color = Color.WHITE
+	#right_wall.size = Vector2(wall_thickness, game_area.y)
+	#right_wall.position = Vector2(game_area.x - wall_thickness, 0)
+	#add_child(right_wall)
 
 
 

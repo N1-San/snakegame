@@ -20,7 +20,6 @@ func spawn_snake():
 	add_child(head)
 	segments.append(head)
 
-
 func move():
 	var new_head_pos = round_to_grid(segments[0].position + direction * segment_size)
 
@@ -52,12 +51,11 @@ func move():
 	var food_pos = round_to_grid(get_parent().get_node("Food").position)
 	if new_head_pos == food_pos:
 		grow()
+		get_parent().increase_score()  # ✅ Add 1 to score when food is eaten
 		get_parent().move_food()
 	else:
 		remove_child(segments[-1])
 		segments.pop_back()
-
-
 
 func grow():
 	var new_part = ColorRect.new()
@@ -75,7 +73,6 @@ func game_over(reason: String):
 	else:
 		print("☠️ Game Over!")
 	get_tree().paused = true
-
 
 func _process(_delta):
 	if Input.is_action_just_pressed("move_up") and direction != Vector2.DOWN:
