@@ -1,3 +1,10 @@
 [gd_scene format=3 uid="uid://bx68km380vr5d"]
 
 [node name="Main" type="Node2D"]
+
+[node name="Snake" type="Node2D" parent="."]
+
+[node name="MoveTimer" type="Timer" parent="."]
+wait_time = 0.15
+
+[node name="Food" type="Sprite2D" parent="."]
